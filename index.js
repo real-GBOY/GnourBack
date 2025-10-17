@@ -21,6 +21,10 @@ app.use(
 	})
 );
 
+app.get("/", (req, res) => {
+	res.send("Hello World");
+});
+
 const teamRoutes = require("./Routes/TeamRoutes");
 const userRoutes = require("./Routes/UserRoutes");
 const authRoutes = require("./Routes/authRoutes");
