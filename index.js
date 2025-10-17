@@ -10,6 +10,8 @@ const cors = require("cors");
 const dbconnect = require("./config/dbconfig");
 
 dbconnect();
+// ✅ Tell Express to trust Vercel (or any reverse proxy)
+app.set("trust proxy", 1);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
