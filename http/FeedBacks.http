@@ -1,0 +1,450 @@
+@host = http://localhost:4005/api/feedback
+@feedbackId = 68929fa4e5238dcb4c033c00
+@userId = 68915d9d3ba05099590afcdd
+@taskId = 68929f44e5238dcb4c033bf1
+@meetingId = 6892971f03d29009b2b0f372
+@attendanceId = 68915d9d3ba05099590afcdd
+
+### Create Feedback - Task Related
+POST {{host}}/
+Content-Type: application/json
+
+{
+  "title": "Task Completion Feedback",
+  "content": "The task was completed successfully with good attention to detail. The team member showed excellent problem-solving skills.",
+  "category": "task",
+  "submittedBy": "{{userId}}",
+  "taskId": "{{taskId}}"
+}
+# ! Create Feedback - Task Related Response
+# {
+#   "message": "Feedback created successfully",
+#   "data": {
+#     "title": "Task Completion Feedback",
+#     "content": "The task was completed successfully with good attention to detail. The team member showed excellent problem-solving skills.",
+#     "category": "task",
+#     "submittedBy": {
+#       "_id": "68915d9d3ba05099590afcdd",
+#       "firstName": "John",
+#       "lastName": "Doe",
+#       "email": "jon.doe@example.com"
+#     },
+#     "taskId": {
+#       "_id": "68929f44e5238dcb4c033bf1",
+#       "title": "Fix login bug",
+#       "description": "Login not working on iOS devices."
+#     },
+#     "_id": "689363961f511e2396942495",
+#     "__v": 0
+#   }
+# }
+
+### Create Feedback - Meeting Related
+POST {{host}}/
+Content-Type: application/json
+
+{
+  "title": "Meeting Effectiveness Feedback",
+  "content": "The meeting was well-organized and productive. All agenda items were covered thoroughly.",
+  "category": "meeting",
+  "submittedBy": "{{userId}}",
+  "meetingId": "{{meetingId}}"
+}
+# ! Create Feedback - Meeting Related Response
+# {
+#   "message": "Feedback created successfully",
+#   "data": {
+#     "title": "Meeting Effectiveness Feedback",
+#     "content": "The meeting was well-organized and productive. All agenda items were covered thoroughly.",
+#     "category": "meeting",
+#     "submittedBy": {
+#       "_id": "68915d9d3ba05099590afcdd",
+#       "firstName": "John",
+#       "lastName": "Doe",
+#       "email": "jon.doe@example.com"
+#     },
+#     "meetingId": {
+#       "_id": "6892971f03d29009b2b0f372",
+#       "title": "Tech Conference 2025"
+#     },
+#     "_id": "689363b91f511e2396942499",
+#     "__v": 0
+#   }
+# }
+### Create Feedback - Attendance Related
+POST {{host}}/
+Content-Type: application/json
+
+{
+  "title": "Attendance Behavior Feedback",
+  "content": "Consistent attendance and punctuality. Good participation in team activities.",
+  "category": "attendance",
+  "submittedBy": "{{userId}}",
+  "attendanceId": "{{attendanceId}}"
+}
+# ! Create Feedback - Attendance Related Response
+# {
+#   "message": "Feedback created successfully",
+#   "data": {
+#     "title": "Attendance Behavior Feedback",
+#     "content": "Consistent attendance and punctuality. Good participation in team activities.",
+#     "category": "attendance",
+#     "submittedBy": {
+#       "_id": "68915d9d3ba05099590afcdd",
+#       "firstName": "John",
+#       "lastName": "Doe",
+#       "email": "jon.doe@example.com"
+#     },
+#     "attendanceId": null,
+#     "_id": "689364021f511e239694249d",
+#     "__v": 0
+#   }
+# }
+
+### Create Feedback - Behavior Related
+POST {{host}}/
+Content-Type: application/json
+
+{
+  "title": "Team Behavior Feedback",
+  "content": "Excellent teamwork and communication skills. Always willing to help others.",
+  "category": "behavior",
+  "submittedBy": "{{userId}}"
+}
+# ! Create Feedback - Behavior Related Response
+# {
+#   "message": "Feedback created successfully",
+#   "data": {
+#     "title": "Team Behavior Feedback",
+#     "content": "Excellent teamwork and communication skills. Always willing to help others.",
+#     "category": "behavior",
+#     "submittedBy": {
+#       "_id": "68915d9d3ba05099590afcdd",
+#       "firstName": "John",
+#       "lastName": "Doe",
+#       "email": "jon.doe@example.com"
+#     },
+#     "_id": "689364141f511e23969424a1",
+#     "__v": 0
+#   }
+# }
+
+### Create Feedback - Other Category
+POST {{host}}/
+Content-Type: application/json
+
+{
+  "title": "General Feedback",
+  "content": "Overall performance has been satisfactory. Room for improvement in time management.",
+  "category": "other",
+  "submittedBy": "{{userId}}"
+}
+
+### Get All Feedback
+GET {{host}}/
+# ! Get All Feedback Response
+# [
+#   {
+#     "_id": "68929f8ee5238dcb4c033bfc",
+#     "title": "Updated Task Completion Feedback",
+#     "content": "The task was completed successfully with excellent attention to detail. The team member showed outstanding problem-solving skills and initiative.",
+#     "category": "task",
+#     "submittedBy": {
+#       "_id": "68915d9d3ba05099590afcdd",
+#       "firstName": "John",
+#       "lastName": "Doe",
+#       "email": "jon.doe@example.com"
+#     },
+#     "taskId": {
+#       "_id": "68929f44e5238dcb4c033bf1",
+#       "title": "Fix login bug",
+#       "description": "Login not working on iOS devices."
+#     },
+#     "__v": 0
+#   },
+#   {
+#     "_id": "68929fc2e5238dcb4c033c03",
+#     "title": "Attendance Behavior Feedback",
+#     "content": "Consistent attendance and punctuality. Good participation in team activities.",
+#     "category": "attendance",
+#     "submittedBy": {
+#       "_id": "68915d9d3ba05099590afcdd",
+#       "firstName": "John",
+#       "lastName": "Doe",
+#       "email": "jon.doe@example.com"
+#     },
+#     "attendanceId": null,
+#     "__v": 0
+#   },
+#   {
+#     "_id": "68929fcee5238dcb4c033c07",
+#     "title": "Team Behavior Feedback",
+#     "content": "Excellent teamwork and communication skills. Always willing to help others.",
+#     "category": "behavior",
+#     "submittedBy": {
+#       "_id": "68915d9d3ba05099590afcdd",
+#       "firstName": "John",
+#       "lastName": "Doe",
+#       "email": "jon.doe@example.com"
+#     },
+#     "__v": 0
+#   },
+#   {
+#     "_id": "6892a029a59a2534452ad496",
+#     "title": "Meeting Effectiveness Feedback",
+#     "content": "The meeting was well-organized and productive. All agenda items were covered thoroughly.",
+#     "category": "meeting",
+#     "submittedBy": {
+#       "_id": "68915d9d3ba05099590afcdd",
+#       "firstName": "John",
+#       "lastName": "Doe",
+#       "email": "jon.doe@example.com"
+#     },
+#     "meetingId": {
+#       "_id": "6892971f03d29009b2b0f372",
+#       "title": "Tech Conference 2025"
+#     },
+#     "__v": 0
+#   },
+#   {
+#     "_id": "689363961f511e2396942495",
+#     "title": "Task Completion Feedback",
+#     "content": "The task was completed successfully with good attention to detail. The team member showed excellent problem-solving skills.",
+#     "category": "task",
+#     "submittedBy": {
+#       "_id": "68915d9d3ba05099590afcdd",
+#       "firstName": "John",
+#       "lastName": "Doe",
+#       "email": "jon.doe@example.com"
+#     },
+#     "taskId": {
+#       "_id": "68929f44e5238dcb4c033bf1",
+#       "title": "Fix login bug",
+#       "description": "Login not working on iOS devices."
+#     },
+#     "__v": 0
+#   },
+#   {
+#     "_id": "689363b91f511e2396942499",
+#     "title": "Meeting Effectiveness Feedback",
+#     "content": "The meeting was well-organized and productive. All agenda items were covered thoroughly.",
+#     "category": "meeting",
+#     "submittedBy": {
+#       "_id": "68915d9d3ba05099590afcdd",
+#       "firstName": "John",
+#       "lastName": "Doe",
+#       "email": "jon.doe@example.com"
+#     },
+#     "meetingId": {
+#       "_id": "6892971f03d29009b2b0f372",
+#       "title": "Tech Conference 2025"
+#     },
+#     "__v": 0
+#   },
+#   {
+#     "_id": "689364021f511e239694249d",
+#     "title": "Attendance Behavior Feedback",
+#     "content": "Consistent attendance and punctuality. Good participation in team activities.",
+#     "category": "attendance",
+#     "submittedBy": {
+#       "_id": "68915d9d3ba05099590afcdd",
+#       "firstName": "John",
+#       "lastName": "Doe",
+#       "email": "jon.doe@example.com"
+#     },
+#     "attendanceId": null,
+#     "__v": 0
+#   },
+#   {
+#     "_id": "689364141f511e23969424a1",
+#     "title": "Team Behavior Feedback",
+#     "content": "Excellent teamwork and communication skills. Always willing to help others.",
+#     "category": "behavior",
+#     "submittedBy": {
+#       "_id": "68915d9d3ba05099590afcdd",
+#       "firstName": "John",
+#       "lastName": "Doe",
+#       "email": "jon.doe@example.com"
+#     },
+#     "__v": 0
+#   }
+# ]
+
+### Get Feedback by ID
+GET {{host}}/{{feedbackId}}
+
+### Get Feedback by ID (Invalid)
+GET {{host}}/invalid-id
+
+### Update Feedback
+PATCH {{host}}/{{feedbackId}}
+Content-Type: application/json
+
+{
+  "title": "Updated Task Completion Feedback",
+  "content": "The task was completed successfully with excellent attention to detail. The team member showed outstanding problem-solving skills and initiative.",
+  "category": "task"
+}
+
+### Update Feedback (Invalid ID)
+PATCH {{host}}/invalid-id
+Content-Type: application/json
+
+{
+  "title": "This should fail",
+  "content": "This update should not work"
+}
+
+### Delete Feedback
+DELETE {{host}}/{{feedbackId}}
+
+### Delete Feedback (Invalid ID)
+DELETE {{host}}/invalid-id
+
+### Get Feedback by User (if route exists)
+GET {{host}}/user/{{userId}}
+# ! Get Feedback by User Response
+# [
+#   {
+#     "_id": "68929f8ee5238dcb4c033bfc",
+#     "title": "Updated Task Completion Feedback",
+#     "content": "The task was completed successfully with excellent attention to detail. The team member showed outstanding problem-solving skills and initiative.",
+#     "category": "task",
+#     "submittedBy": {
+#       "_id": "68915d9d3ba05099590afcdd",
+#       "firstName": "John",
+#       "lastName": "Doe",
+#       "email": "jon.doe@example.com"
+#     },
+#     "taskId": {
+#       "_id": "68929f44e5238dcb4c033bf1",
+#       "title": "Fix login bug",
+#       "description": "Login not working on iOS devices."
+#     },
+#     "__v": 0
+#   },
+#   {
+#     "_id": "68929fc2e5238dcb4c033c03",
+#     "title": "Attendance Behavior Feedback",
+#     "content": "Consistent attendance and punctuality. Good participation in team activities.",
+#     "category": "attendance",
+#     "submittedBy": {
+#       "_id": "68915d9d3ba05099590afcdd",
+#       "firstName": "John",
+#       "lastName": "Doe",
+#       "email": "jon.doe@example.com"
+#     },
+#     "attendanceId": null,
+#     "__v": 0
+#   },
+#   {
+#     "_id": "68929fcee5238dcb4c033c07",
+#     "title": "Team Behavior Feedback",
+#     "content": "Excellent teamwork and communication skills. Always willing to help others.",
+#     "category": "behavior",
+#     "submittedBy": {
+#       "_id": "68915d9d3ba05099590afcdd",
+#       "firstName": "John",
+#       "lastName": "Doe",
+#       "email": "jon.doe@example.com"
+#     },
+#     "__v": 0
+#   },
+#   {
+#     "_id": "6892a029a59a2534452ad496",
+#     "title": "Meeting Effectiveness Feedback",
+#     "content": "The meeting was well-organized and productive. All agenda items were covered thoroughly.",
+#     "category": "meeting",
+#     "submittedBy": {
+#       "_id": "68915d9d3ba05099590afcdd",
+#       "firstName": "John",
+#       "lastName": "Doe",
+#       "email": "jon.doe@example.com"
+#     },
+#     "meetingId": {
+#       "_id": "6892971f03d29009b2b0f372",
+#       "title": "Tech Conference 2025"
+#     },
+#     "__v": 0
+#   },
+#   {
+#     "_id": "689363961f511e2396942495",
+#     "title": "Task Completion Feedback",
+#     "content": "The task was completed successfully with good attention to detail. The team member showed excellent problem-solving skills.",
+#     "category": "task",
+#     "submittedBy": {
+#       "_id": "68915d9d3ba05099590afcdd",
+#       "firstName": "John",
+#       "lastName": "Doe",
+#       "email": "jon.doe@example.com"
+#     },
+#     "taskId": {
+#       "_id": "68929f44e5238dcb4c033bf1",
+#       "title": "Fix login bug",
+#       "description": "Login not working on iOS devices."
+#     },
+#     "__v": 0
+#   },
+#   {
+#     "_id": "689363b91f511e2396942499",
+#     "title": "Meeting Effectiveness Feedback",
+#     "content": "The meeting was well-organized and productive. All agenda items were covered thoroughly.",
+#     "category": "meeting",
+#     "submittedBy": {
+#       "_id": "68915d9d3ba05099590afcdd",
+#       "firstName": "John",
+#       "lastName": "Doe",
+#       "email": "jon.doe@example.com"
+#     },
+#     "meetingId": {
+#       "_id": "6892971f03d29009b2b0f372",
+#       "title": "Tech Conference 2025"
+#     },
+#     "__v": 0
+#   },
+#   {
+#     "_id": "689364021f511e239694249d",
+#     "title": "Attendance Behavior Feedback",
+#     "content": "Consistent attendance and punctuality. Good participation in team activities.",
+#     "category": "attendance",
+#     "submittedBy": {
+#       "_id": "68915d9d3ba05099590afcdd",
+#       "firstName": "John",
+#       "lastName": "Doe",
+#       "email": "jon.doe@example.com"
+#     },
+#     "attendanceId": null,
+#     "__v": 0
+#   },
+#   {
+#     "_id": "689364141f511e23969424a1",
+#     "title": "Team Behavior Feedback",
+#     "content": "Excellent teamwork and communication skills. Always willing to help others.",
+#     "category": "behavior",
+#     "submittedBy": {
+#       "_id": "68915d9d3ba05099590afcdd",
+#       "firstName": "John",
+#       "lastName": "Doe",
+#       "email": "jon.doe@example.com"
+#     },
+#     "__v": 0
+#   }
+# ]
+
+### Get Feedback by Category (if route exists)
+GET {{host}}/category/task
+
+### Get Feedback by Task (if route exists)
+GET {{host}}/task/{{taskId}}
+
+### Get Feedback by Meeting (if route exists)
+GET {{host}}/meeting/{{meetingId}}
+
+### Get Feedback by Attendance (if route exists)
+GET {{host}}/attendance/{{attendanceId}}
+
+### Test Different Categories
+GET {{host}}/category/meeting
+GET {{host}}/category/attendance
+GET {{host}}/category/behavior
+GET {{host}}/category/other

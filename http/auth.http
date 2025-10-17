@@ -1,0 +1,319 @@
+@host = http://localhost:4005/api/auth
+@id = 68915d9d3ba05099590afcdd
+@token = your_jwt_token_here
+
+### Sign Up with Photo Upload
+POST {{host}}/signup
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="firstName"
+
+John
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="lastName"
+
+Doe
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="nationalID"
+
+1234515501
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="dateOfBirth"
+
+1990-01-01
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="email"
+
+jhn.doe110@ele.com
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="password"
+
+strongpassword123
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="phoneNumber"
+
++201000000000
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="test.png"
+Content-Type: image/png
+
+< ./test.png
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+# ! Sign Up with Photo Upload Response
+# {
+#   "success": true,
+#   "message": "User created successfully",
+#   "data": {
+#     "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+#     "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+#     "user": {
+#       "id": "689367651f511e23969424e7",
+#       "firstName": "John",
+#       "lastName": "Doe",
+#       "email": "jhn.doe110@ele.com",
+#       "profilePicture": "https://res.cloudinary.com/dbpb1lkwh/image/upload/v1754490723/Gnour/chacpmo1zqaw187e9oa9.jpg"
+#     }
+#   }
+# }
+
+
+
+
+
+### Login
+POST {{host}}/login
+Content-Type: application/json
+
+{
+  "email": "mahmmoudnayel2004@gmail.com",
+  "password": "Test1234@"
+}
+
+
+
+# ! Login Response
+#  {
+#   "success": true,
+#   "message": "Login successful",
+#   "data": {
+#     "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OTE1ZDlkM2JhMDUwOTk1OTBhZmNkZCIsImVtYWlsIjoiam9uLmRvZUBleGFtcGxlLmNvbSIsIm5hbWUiOiJKb2huIERvZSIsInJvbGUiOnsiaWQiOiI2ODkxNWQ0NzM0MmViYThjNjE2YjdiNTgiLCJrZXkiOiJQcmVzaWRlbnQiLCJwZXJtaXNzaW9ucyI6W3siX2lkIjoiNjg5MTVkNDczNDJlYmE4YzYxNmI3YjNhIiwia2V5IjoiYXBwcm92ZV9wZXJzb24ifSx7Il9pZCI6IjY4OTE1ZDQ3MzQyZWJhOGM2MTZiN2IzOSIsImtleSI6InJlamVjdF9wZXJzb24ifSx7Il9pZCI6IjY4OTE1ZDQ3MzQyZWJhOGM2MTZiN2IzYyIsImtleSI6InZpZXdfcGVyc29uIn0seyJfaWQiOiI2ODkxNWQ0NzM0MmViYThjNjE2YjdiM2IiLCJrZXkiOiJjcmVhdGVfdGVhbSJ9LHsiX2lkIjoiNjg5MTVkNDczNDJlYmE4YzYxNmI3YjQwIiwia2V5IjoiZWRpdF90ZWFtIn0seyJfaWQiOiI2ODkxNWQ0NzM0MmViYThjNjE2YjdiNDIiLCJrZXkiOiJkZWxldGVfdGVhbSJ9LHsiX2lkIjoiNjg5MTVkNDczNDJlYmE4YzYxNmI3YjNkIiwia2V5Ijoidmlld190ZWFtIn0seyJfaWQiOiI2ODkxNWQ0NzM0MmViYThjNjE2YjdiM2UiLCJrZXkiOiJjcmVhdGVfdGVhbXNfaW5fdGFzayJ9LHsiX2lkIjoiNjg5MTVkNDczNDJlYmE4YzYxNmI3YjNmIiwia2V5IjoiZWRpdF90ZWFtc19pbl90YXNrIn0seyJfaWQiOiI2ODkxNWQ0NzM0MmViYThjNjE2YjdiNGUiLCJrZXkiOiJkZWxldGVfdGVhbXNfaW5fdGFzayJ9LHsiX2lkIjoiNjg5MTVkNDczNDJlYmE4YzYxNmI3YjQxIiwia2V5Ijoidmlld190ZWFtc19pbl90YXNrIn0seyJfaWQiOiI2ODkxNWQ0NzM0MmViYThjNjE2YjdiNTAiLCJrZXkiOiJjcmVhdGVfZXZlbnQifSx7Il9pZCI6IjY4OTE1ZDQ3MzQyZWJhOGM2MTZiN2I0MyIsImtleSI6ImVkaXRfZXZlbnQifSx7Il9pZCI6IjY4OTE1ZDQ3MzQyZWJhOGM2MTZiN2I0NCIsImtleSI6ImRlbGV0ZV9ldmVudCJ9LHsiX2lkIjoiNjg5MTVkNDczNDJlYmE4YzYxNmI3YjQ1Iiwia2V5Ijoidmlld19ldmVudCJ9LHsiX2lkIjoiNjg5MTVkNDczNDJlYmE4YzYxNmI3YjQ2Iiwia2V5IjoiY3JlYXRlX3Rhc2sifSx7Il9pZCI6IjY4OTE1ZDQ3MzQyZWJhOGM2MTZiN2I0NyIsImtleSI6ImVkaXRfdGFzayJ9LHsiX2lkIjoiNjg5MTVkNDczNDJlYmE4YzYxNmI3YjQ4Iiwia2V5IjoiZGVsZXRlX3Rhc2sifSx7Il9pZCI6IjY4OTE1ZDQ3MzQyZWJhOGM2MTZiN2I0OSIsImtleSI6InZpZXdfdGFzayJ9LHsiX2lkIjoiNjg5MTVkNDczNDJlYmE4YzYxNmI3YjRhIiwia2V5IjoidXBsb2FkX2ZpbGUifSx7Il9pZCI6IjY4OTE1ZDQ3MzQyZWJhOGM2MTZiN2I0YiIsImtleSI6ImNyZWF0ZV9mZWVkYmFjayJ9LHsiX2lkIjoiNjg5MTVkNDczNDJlYmE4YzYxNmI3YjRjIiwia2V5IjoiZWRpdF9mZWVkYmFjayJ9LHsiX2lkIjoiNjg5MTVkNDczNDJlYmE4YzYxNmI3YjRkIiwia2V5IjoiZGVsZXRlX2ZlZWRiYWNrIn0seyJfaWQiOiI2ODkxNWQ0NzM0MmViYThjNjE2YjdiNTMiLCJrZXkiOiJ2aWV3X2ZlZWRiYWNrIn0seyJfaWQiOiI2ODkxNWQ0NzM0MmViYThjNjE2YjdiNGYiLCJrZXkiOiJjcmVhdGVfYXR0ZW5kYW5jZSJ9LHsiX2lkIjoiNjg5MTVkNDczNDJlYmE4YzYxNmI3YjU0Iiwia2V5IjoiZWRpdF9hdHRlbmRhbmNlIn0seyJfaWQiOiI2ODkxNWQ0NzM0MmViYThjNjE2YjdiNTEiLCJrZXkiOiJkZWxldGVfYXR0ZW5kYW5jZSJ9LHsiX2lkIjoiNjg5MTVkNDczNDJlYmE4YzYxNmI3YjUyIiwia2V5Ijoidmlld19hdHRlbmRhbmNlIn1dfSwiaWF0IjoxNzU0NDkyNDYwLCJleHAiOjE3NTQ1Nzg4NjB9.GYNy-wUP6Ftcsf6k_IfFnJCOMhTguZLmCw0SFiTLAFM",
+#     "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OTE1ZDlkM2JhMDUwOTk1OTBhZmNkZCIsImVtYWlsIjoiam9uLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTc1NDQ5MjQ2MCwiZXhwIjoxNzU1MDk3MjYwfQ.p2UBmodmadybVO4B3fJTqfdvbCu5hjDz_JFFHQFYDBM",
+#     "user": {
+#       "id": "68915d9d3ba05099590afcdd",
+#       "firstName": "John",
+#       "lastName": "Doe",
+#       "email": "jon.doe@example.com",
+#       "role": {
+#         "_id": "68915d47342eba8c616b7b58",
+#         "key": "President",
+#         "__v": 0,
+#         "permissions": [
+#           {
+#             "_id": "68915d47342eba8c616b7b3a",
+#             "key": "approve_person"
+#           },
+#           {
+#             "_id": "68915d47342eba8c616b7b39",
+#             "key": "reject_person"
+#           },
+#           {
+#             "_id": "68915d47342eba8c616b7b3c",
+#             "key": "view_person"
+#           },
+#           {
+#             "_id": "68915d47342eba8c616b7b3b",
+#             "key": "create_team"
+#           },
+#           {
+#             "_id": "68915d47342eba8c616b7b40",
+#             "key": "edit_team"
+#           },
+#           {
+#             "_id": "68915d47342eba8c616b7b42",
+#             "key": "delete_team"
+#           },
+#           {
+#             "_id": "68915d47342eba8c616b7b3d",
+#             "key": "view_team"
+#           },
+#           {
+#             "_id": "68915d47342eba8c616b7b3e",
+#             "key": "create_teams_in_task"
+#           },
+#           {
+#             "_id": "68915d47342eba8c616b7b3f",
+#             "key": "edit_teams_in_task"
+#           },
+#           {
+#             "_id": "68915d47342eba8c616b7b4e",
+#             "key": "delete_teams_in_task"
+#           },
+#           {
+#             "_id": "68915d47342eba8c616b7b41",
+#             "key": "view_teams_in_task"
+#           },
+#           {
+#             "_id": "68915d47342eba8c616b7b50",
+#             "key": "create_event"
+#           },
+#           {
+#             "_id": "68915d47342eba8c616b7b43",
+#             "key": "edit_event"
+#           },
+#           {
+#             "_id": "68915d47342eba8c616b7b44",
+#             "key": "delete_event"
+#           },
+#           {
+#             "_id": "68915d47342eba8c616b7b45",
+#             "key": "view_event"
+#           },
+#           {
+#             "_id": "68915d47342eba8c616b7b46",
+#             "key": "create_task"
+#           },
+#           {
+#             "_id": "68915d47342eba8c616b7b47",
+#             "key": "edit_task"
+#           },
+#           {
+#             "_id": "68915d47342eba8c616b7b48",
+#             "key": "delete_task"
+#           },
+#           {
+#             "_id": "68915d47342eba8c616b7b49",
+#             "key": "view_task"
+#           },
+#           {
+#             "_id": "68915d47342eba8c616b7b4a",
+#             "key": "upload_file"
+#           },
+#           {
+#             "_id": "key": "create_feedback"
+#           },
+#           {
+#             "_id": "68915d47342eba8c616b7b4c",
+#             "key": "edit_feedback"
+#           },
+#           {
+#             "_id": "68915d47342eba8c616b7b4d",
+#             "key": "delete_feedback"
+#           },
+#           {
+#             "_id": "68915d47342eba8c616b7b53",
+#             "key": "view_feedback"
+#           },
+#           {
+#             "_id": "68915d47342eba8c616b7b4f",
+#             "key": "create_attendance"
+#           },
+#           {
+#             "_id": "68915d47342eba8c616b7b54",
+#             "key": "edit_attendance"
+#           },
+#           {
+#             "_id": "68915d47342eba8c616b7b51",
+#             "key": "delete_attendance"
+#           },
+#           {
+#             "_id": "68915d47342eba8c616b7b52",
+#             "key": "view_attendance"
+#           }
+#         ]
+#       },
+#       "profilePicture": "https://res.cloudinary.com/your-cloud-name/image/upload/v1/profiles/default-avatar.png"
+#     }
+#   }
+# }
+
+### Login with Invalid Credentials
+POST {{host}}/login
+Content-Type: application/json
+
+{
+  "email": "nonexistent@example.com",
+  "password": "wrongpassword"
+}
+
+
+
+### Refresh Token
+POST {{host}}/refresh
+Content-Type: application/json
+
+{
+  "refreshToken": "your-refresh-token-here"
+}
+
+# ! Refresh Token Response
+# {
+#   "success": true,
+#   "message": "Token refreshed successfully",
+#   "data": {
+#     "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+#     "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+#   }
+# }
+
+### Refresh Token with Invalid Token
+POST {{host}}/refresh
+Content-Type: application/json
+
+{
+  "refreshToken": "invalid-refresh-token"
+}
+
+### Logout
+POST {{host}}/logout
+Content-Type: application/json
+
+{
+  "refreshToken": "your-refresh-token-here"
+}
+
+# ! Logout Response
+# {
+#   "success": true,
+#   "message": "Logged out successfully"
+# }
+
+### Logout without Token
+POST {{host}}/logout
+Content-Type: application/json
+
+{
+  "refreshToken": ""
+}
+
+### Get Profile by ID
+GET {{host}}/profile/{{id}}
+Authorization: Bearer {{token}}
+
+### Get Profile with "me" parameter
+GET {{host}}/profile/me
+Authorization: Bearer {{token}}
+
+### Get Profile with Invalid ID
+GET {{host}}/profile/invalid-id
+Authorization: Bearer {{token}}
+
+### Get Profile without ID
+GET {{host}}/profile/
+Authorization: Bearer {{token}}
+
+### Get Profile without Authorization (should fail)
+GET {{host}}/profile/me
+
+### Change Password
+PUT {{host}}/profile/password
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "currentPassword": "oldpassword",
+  "newPassword": "newpassword123"
+}
+
+### Change Password with Wrong Current Password
+PUT {{host}}/profile/password
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "currentPassword": "wrongpassword",
+  "newPassword": "newpassword123"
+}
+
+### Change Password Missing Fields
+PUT {{host}}/profile/password
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "currentPassword": "oldpassword"
+}
+
+
+

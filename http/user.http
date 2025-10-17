@@ -1,0 +1,262 @@
+@host = http://localhost:4005/api/users
+@userId = 68938d8fc1a3eaaf288a900c
+@roleId = 68915d47342eba8c616b7b58
+@teamId = 68915d47342eba8c616b7b59
+
+@token =eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OTE1ODNjNDJkNmY4MjAyMjFhMzMzMiIsImVtYWlsIjoiam9uLmRvZUBleGFtcGxlLmNvbSIsIm5hbWUiOiJKb2huIERvZSIsInJvbGUiOnsiaWQiOiI2ODkxMzRjODkyZTlhMzVhOTQwNjljMDUiLCJrZXkiOiJQcmVzaWRlbnQiLCJwZXJtaXNzaW9ucyI6W3siX2lkIjoiNjg5MTM0Yzg5MmU5YTM1YTk0MDY5YmY0Iiwia2V5IjoiYXBwcm92ZV9wZXJzb24ifSx7Il9pZCI6IjY4OTNlOTI1Y2FjOTg5NWVjZDc1ODhjZSIsImtleSI6InZpZXdfdW5wcm92ZWRfcGVyc29uIn0seyJfaWQiOiI2ODkxMzRjODkyZTlhMzVhOTQwNjljYjIiLCJrZXkiOiJyZWplY3RfcGVyc29uIn0seyJfaWQiOiI2ODkxMzRjODkyZTlhMzVhOTQwNjljMDEiLCJrZXkiOiJ2aWV3X3BlcnNvbiJ9LHsiX2lkIjoiNjg5MTM0Yzg5MmU5YTM1YTk0MDY5YmU3Iiwia2V5IjoiY3JlYXRlX3RlYW0ifSx7Il9pZCI6IjY4OTEzNGM4OTJlOWEzNWE5NDA2OWJmNiIsImtleSI6ImVkaXRfdGVhbSJ9LHsiX2lkIjoiNjg5MTM0Yzg5MmU5YTM1YTk0MDY5YmYzIiwia2V5IjoiZGVsZXRlX3RlYW0ifSx7Il9pZCI6IjY4OTEzNGM4OTJlOWEzNWE5NDA2OWJmNyIsImtleSI6InZpZXdfdGVhbSJ9LHsiX2lkIjoiNjg5MTM0Yzg5MmU5YTM1YTk0MDY5YmY1Iiwia2V5IjoiY3JlYXRlX3RlYW1zX2luX3Rhc2sifSx7Il9pZCI6IjY4OTEzNGM4OTJlOWEzNWE5NDA2OWJmYiIsImtleSI6ImVkaXRfdGVhbXNfaW5fdGFzayJ9LHsiX2lkIjoiNjg5MTM0Yzg5MmU5YTM1YTk0MDY5YmZhIiwia2V5IjoiZGVsZXRlX3RlYW1zX2luX3Rhc2sifSx7Il9pZCI6IjY4OTEzNGM4OTJlOWEzNWE5NDA2OWJmZCIsImtleSI6InZpZXdfdGVhbXNfaW5fdGFzayJ9LHsiX2lkIjoiNjg5MTM0Yzg5MmU5YTM1YTk0MDY5YmZlIiwia2V5IjoiY3JlYXRlX2V2ZW50In0seyJfaWQiOiI2ODkxMzRjODkyZTlhMzVhOTQwNjljZmMiLCJrZXkiOiJlZGl0X2V2ZW50In0seyJfaWQiOiI2ODkxMzRjODkyZTlhMzVhOTQwNjljZmQiLCJrZXkiOiJkZWxldGVfZXZlbnQifSx7Il9pZCI6IjY4OTEzNGM4OTJlOWEzNWE5NDA2OWJmZiIsImtleSI6InZpZXdfZXZlbnQifSx7Il9pZCI6IjY4OTEzNGM4OTJlOWEzNWE5NDA2OWMwMCIsImtleSI6ImNyZWF0ZV90YXNrIn0seyJfaWQiOiI2ODkxMzRjODkyZTlhMzVhOTQwNjljZmkiLCJrZXkiOiJlZGl0X3Rhc2sifSx7Il9pZCI6IjY4OTEzNGM4OTJlOWEzNWE5NDA2OWMwMiIsImtleSI6ImRlbGV0ZV90YXNrIn0seyJfaWQiOiI2ODkxMzRjODkyZTlhMzVhOTQwNjljZTgiLCJrZXkiOiJ2aWV3X3Rhc2sifSx7Il9pZCI6IjY4OTEzNGM4OTJlOWEzNWE5NDA2OWJlOSIsImtleSI6InVwbG9hZF9maWxlIn0seyJfaWQiOiI2ODkxMzRjODkyZTlhMzVhOTQwNjljZWEiLCJrZXkiOiJjcmVhdGVfZmVlZGJhY2sifSx7Il9pZCI6IjY4OTEzNGM4OTJlOWEzNWE5NDA2OWJlYiIsImtleSI6ImVkaXRfZmVlZGJhY2sifSx7Il9pZCI6IjY4OTEzNGM4OTJlOWEzNWE5NDA2OWJlYyIsImtleSI6ImRlbGV0ZV9mZWVkYmFjayJ9LHsiX2lkIjoiNjg5MTM0Yzg5MmU5YTM1YTk0MDY5YmVkIiwia2V5Ijoidmlld19mZWVkYmFjayJ9LHsiX2lkIjoiNjg5MTM0Yzg5MmU5YTM1YTk0MDY5YmVlIiwia2V5IjoiY3JlYXRlX2F0dGVuZGFuY2UifSx7Il9pZCI6IjY4OTEzNGM4OTJlOWEzNWE5NDA2OWJlZiIsImtleSI6ImVkaXRfYXR0ZW5kYW5jZSJ9LHsiX2lkIjoiNjg5MTM0Yzg5MmU5YTM1YTk0MDY5YmYwIiwia2V5IjoiZGVsZXRlX2F0dGVuZGFuY2UifSx7Il9pZCI6IjY4OTEzNGM4OTJlOWEzNWE5NDA2OWJmMSIsImtleSI6InZpZXdfYXR0ZW5kYW5jZSJ9XX0sImlhdCI6MTc1NDUyNDAyNywiZXhwIjoxNzU0NjEwNDI3fQ.MAlSHJrCBG4vvwHes4U_TIykOZmfl7hE27Dctg6IamA
+@authHeader = Authorization: Bearer {{token}}
+### Get All Users
+GET {{host}}
+
+### Get Unverified Users
+GET {{host}}/unverified
+{{authHeader}}
+
+
+# {
+#   "success": true,
+#   "data": [
+#     {
+#       "authType": "local",
+#       "_id": "6891582329170cb28fbd821a",
+#       "firstName": "John",
+#       "lastName": "Doe",
+#       "nationalID": "123789",
+#       "dateOfBirth": "1990-01-01T00:00:00.000Z",
+#       "email": "john.doe@example.com",
+#       "password": "password123",
+#       "phoneNumber": "+1234567890",
+#       "role": "689134c892e9a35a94069c05",
+#       "profilePicture": "https://res.cloudinary.com/your-cloud-name/image/upload/v1/profiles/default-avatar.png",
+#       "isActive": false,
+#       "isVerified": false,
+#       "createdAt": "2025-08-05T01:02:27.884Z",
+#       "updatedAt": "2025-08-05T01:02:27.884Z",
+#       "__v": 0
+#     },
+#     {
+#       "authType": "local",
+#       "_id": "6892043f1d608f6f4424a293",
+#       "firstName": "John",
+#       "lastName": "Doe",
+#       "nationalID": "123456901",
+#       "dateOfBirth": "1990-01-01T00:00:00.000Z",
+#       "email": "jhn.doe@exmple.com",
+#       "password": "strongpassword123",
+#       "phoneNumber": "+201000000000",
+#       "role": "689134c892e9a35a94069c05",
+#       "profilePicture": "https://res.cloudinary.com/dbpb1lkwh/raw/upload/v1754399804/Gnour/szxya799enpr9xawq5e5",
+#       "isActive": false,
+#       "isVerified": false,
+#       "createdAt": "2025-08-05T13:16:47.783Z",
+#       "updatedAt": "2025-08-05T13:16:47.783Z",
+#       "__v": 0
+#     },
+#     {
+#       "authType": "local",
+#       "_id": "689204881d608f6f4424a29d",
+#       "firstName": "John",
+#       "lastName": "Doe",
+#       "nationalID": "1234501",
+#       "dateOfBirth": "1990-01-01T00:00:00.000Z",
+#       "email": "jhn.doe@exle.com",
+#       "password": "strongpassword123",
+#       "phoneNumber": "+201000000000",
+#       "role": "689134c892e9a35a94069c05",
+#       "profilePicture": "https://res.cloudinary.com/dbpb1lkwh/image/upload/v1754399876/Gnour/xwl2l2xseyibozbkouly.png",
+#       "isActive": false,
+#       "isVerified": false,
+#       "createdAt": "2025-08-05T13:18:00.875Z",
+#       "updatedAt": "2025-08-05T13:18:00.875Z",
+#       "__v": 0
+#     },
+#     {
+#       "authType": "local",
+#       "_id": "689204c51d608f6f4424a2a4",
+#       "firstName": "John",
+#       "lastName": "Doe",
+#       "nationalID": "123451",
+#       "dateOfBirth": "1990-01-01T00:00:00.000Z",
+#       "email": "jhn.doe@ele.com",
+#       "password": "strongpassword123",
+#       "phoneNumber": "+201000000000",
+#       "role": "689134c892e9a35a94069c05",
+#       "profilePicture": "https://res.cloudinary.com/dbpb1lkwh/image/upload/v1754399936/Gnour/sqt2zgglhdg4f2jjbxjb.png",
+#       "isActive": false,
+#       "isVerified": false,
+#       "createdAt": "2025-08-05T13:19:01.423Z",
+#       "updatedAt": "2025-08-05T13:19:01.423Z",
+#       "__v": 0
+#     },
+#     {
+#       "authType": "local",
+#       "_id": "689208a92901cc245851fc3a",
+#       "firstName": "John",
+#       "lastName": "Doe",
+#       "nationalID": "12351",
+#       "dateOfBirth": "1990-01-01T00:00:00.000Z",
+#       "email": "jhn.de@ele.com",
+#       "password": "strongpassword123",
+#       "phoneNumber": "+201000000000",
+#       "role": "689134c892e9a35a94069c05",
+#       "profilePicture": "https://res.cloudinary.com/dbpb1lkwh/image/upload/v1754400933/Gnour/wmcdi0aic4vsygrowvwc.png",
+#       "isActive": false,
+#       "isVerified": false,
+#       "createdAt": "2025-08-05T13:35:37.200Z",
+#       "updatedAt": "2025-08-05T13:35:37.200Z",
+#       "__v": 0
+#     },
+#     {
+#       "authType": "local",
+#       "_id": "689283c33593f0e78b75c197",
+#       "firstName": "John",
+#       "lastName": "Doe",
+#       "nationalID": "12345155",
+#       "dateOfBirth": "1990-01-01T00:00:00.000Z",
+#       "email": "jhn.doe1@ele.com",
+#       "password": "strongpassword123",
+#       "phoneNumber": "+201000000000",
+#       "role": "689134c892e9a35a94069c05",
+#       "profilePicture": "https://res.cloudinary.com/dbpb1lkwh/image/upload/v1754432447/Gnour/tevrmirxxggyk6sarjle.jpg",
+#       "isActive": false,
+#       "isVerified": false,
+#       "createdAt": "2025-08-05T22:20:51.555Z",
+#       "updatedAt": "2025-08-05T22:20:51.555Z",
+#       "__v": 0
+#     }
+#   ]
+# }
+
+
+
+### Verify User
+PATCH {{host}}/verify/{{userId}}
+Content-Type: application/json
+
+{
+  "isVerified": true,
+  "role": "{{roleId}}"
+}
+
+# ! Verify User Response
+# {
+#   "success": true,
+#   "message": "User verified successfully",
+#   "data": {
+#     "_id": "68915d9d3ba05099590afcdd",
+#     "firstName": "John",
+#     "lastName": "Doe",
+#     "email": "jon.doe@example.com",
+#     "isVerified": true,
+#     "role": {
+#       "_id": "68915d47342eba8c616b7b58",
+#       "key": "President",
+#       "permissions": [...]
+#     }
+#   }
+# }
+
+### Verify User (Only Verification Status)
+PATCH {{host}}/verify/{{userId}}
+Content-Type: application/json
+
+{
+  "isVerified": true
+}
+
+### Assign Role to User
+PATCH {{host}}/assign-role/{{userId}}
+Content-Type: application/json
+
+{
+  "roleId": "{{roleId}}"
+}
+
+# ! Assign Role Response
+# {
+#   "success": true,
+#   "message": "Role assigned successfully",
+#   "data": {
+#     "_id": "68915d9d3ba05099590afcdd",
+#     "firstName": "John",
+#     "lastName": "Doe",
+#     "email": "jon.doe@example.com",
+#     "role": {
+#       "_id": "68915d47342eba8c616b7b58",
+#       "key": "President",
+#       "permissions": [...]
+#     }
+#   }
+# }
+
+### Verify User with Invalid ID
+PATCH {{host}}/verify/invalid-id
+Content-Type: application/json
+
+{
+  "isVerified": true
+}
+
+### Assign Role with Invalid User ID
+PATCH {{host}}/assign-role/invalid-id
+Content-Type: application/json
+
+{
+  "roleId": "{{roleId}}"
+} 
+
+### Update Profile with Photo Upload
+PUT http://localhost:4005/api/auth/profile
+Authorization: Bearer {{token}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="firstName"
+
+John
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="lastName"
+
+Doe
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="phoneNumber"
+
++1234567890
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="dateOfBirth"
+
+1990-01-01
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="profile-photo.jpg"
+Content-Type: image/jpeg
+
+< ./test-image.png
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+### Update Profile without Photo Upload
+PUT http://localhost:4005/api/auth/profile
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "phoneNumber": "+1234567890",
+  "dateOfBirth": "1990-01-01"
+}
+
+### Get My Profile
+GET http://localhost:4005/api/auth/profile
+Authorization: Bearer {{token}}
+
+### Get Profile by ID
+GET http://localhost:4005/api/auth/profile/me
+Authorization: Bearer {{token}} 
+
+### Get team members for a specific team (requires ViewTeamMembers permission - Members can use this)
+GET {{host}}/team/{{teamId}}/members
+{{authHeader}}
+
+### Get all teams with their members (requires ViewTeamMembers permission - Members can use this)
+GET {{host}}/teams/with-members
+{{authHeader}} 

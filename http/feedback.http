@@ -1,0 +1,103 @@
+@baseUrl = http://localhost:4005/api/feedback
+@token = your_jwt_token_here
+
+# Common test IDs (replace with real IDs from your DB)
+@userId = 000000000000000000000001
+@otherUserId = 000000000000000000000002
+@taskId = 0000000000000000000000a1
+@meetingId = 0000000000000000000000b2
+@attendanceId = 0000000000000000000000c3
+@feedbackId = 0000000000000000000000f1
+
+### Get All Feedback (requires ViewFeedback permission)
+GET {{baseUrl}}
+Authorization: Bearer {{token}}
+
+### Get Feedback by ID (requires ViewFeedback permission)
+GET {{baseUrl}}/{{feedbackId}}
+Authorization: Bearer {{token}}
+
+### Create Task Feedback (submittedBy is taken from token; requires CreateFeeBack permission)
+POST {{baseUrl}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "title": "Task Progress Feedback",
+  "content": "Great progress on the development tasks",
+  "category": "task",
+  "submittedTo": "{{otherUserId}}",
+  "taskId": "{{taskId}}"
+}
+
+### Create Meeting Feedback (submittedBy is taken from token; requires CreateFeeBack permission)
+POST {{baseUrl}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "title": "Meeting Effectiveness",
+  "content": "The meeting was well organized and productive",
+  "category": "meeting",
+  "submittedTo": "{{otherUserId}}",
+  "meetingId": "{{meetingId}}"
+}
+
+### Create Attendance Feedback (submittedBy is taken from token; requires CreateFeeBack permission)
+POST {{baseUrl}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "title": "Attendance Pattern",
+  "content": "Consistently punctual and present",
+  "category": "attendance",
+  "submittedTo": "{{otherUserId}}",
+  "attendanceId": "{{attendanceId}}"
+}
+
+### Create Behavior Feedback (submittedBy is taken from token; requires CreateFeeBack permission)
+POST {{baseUrl}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "title": "Team Collaboration",
+  "content": "Excellent team player and helps others",
+  "category": "behavior",
+  "submittedTo": "{{otherUserId}}"
+}
+
+### Update Feedback (requires EditFeedback permission)
+PATCH {{baseUrl}}/{{feedbackId}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "title": "Updated Feedback Title",
+  "content": "Updated feedback content"
+}
+
+### Delete Feedback (requires DeleteFeedback permission)
+DELETE {{baseUrl}}/{{feedbackId}}
+Authorization: Bearer {{token}}
+
+### Get Feedback by User (submittedBy) (requires ViewFeedback permission)
+GET {{baseUrl}}/user/{{userId}}
+Authorization: Bearer {{token}}
+
+### Get Feedback by Category (requires ViewFeedback permission)
+GET {{baseUrl}}/category/task
+Authorization: Bearer {{token}}
+
+### Get Feedback by Task (requires ViewFeedback permission)
+GET {{baseUrl}}/task/{{taskId}}
+Authorization: Bearer {{token}}
+
+### Get Feedback by Meeting (requires ViewFeedback permission)
+GET {{baseUrl}}/meeting/{{meetingId}}
+Authorization: Bearer {{token}}
+
+### Get Feedback by Attendance (requires ViewFeedback permission)
+GET {{baseUrl}}/attendance/{{attendanceId}}
+Authorization: Bearer {{token}}

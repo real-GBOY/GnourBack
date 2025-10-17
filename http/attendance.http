@@ -1,0 +1,294 @@
+### Attendance API Requests
+
+# Base URL - Update this to match your server
+@baseUrl = http://localhost:4005/api/attendance
+
+### Create Attendance Record
+POST {{baseUrl}}
+Content-Type: application/json
+Authorization: Bearer <your-jwt-token>
+
+{
+  "user": "507f1f77bcf86cd799439011",
+  "event": "507f1f77bcf86cd799439012",
+  "attendance": true,
+  "status": "present",
+  "lateMinutes": 0,
+  "earlyLeaveMinutes": 0,
+  "feedback": "",
+  "checkInTime": "2025-01-15T09:00:00.000Z",
+  "checkOutTime": "2025-01-15T17:00:00.000Z"
+}
+
+### Get All Attendance Records
+GET {{baseUrl}}
+Authorization: Bearer <your-jwt-token>
+
+### Get Attendance Record by ID
+GET {{baseUrl}}/507f1f77bcf86cd799439013
+Authorization: Bearer <your-jwt-token>
+
+### Get Attendance Records by User
+GET {{baseUrl}}/user/507f1f77bcf86cd799439011
+Authorization: Bearer <your-jwt-token>
+
+### Get Attendance Records by Event
+GET {{baseUrl}}/event/507f1f77bcf86cd799439012
+Authorization: Bearer <your-jwt-token>
+
+### Update Attendance Record
+PATCH {{baseUrl}}/507f1f77bcf86cd799439013
+Content-Type: application/json
+Authorization: Bearer <your-jwt-token>
+
+{
+  "status": "late",
+  "lateMinutes": 15,
+  "feedback": "Arrived 15 minutes late due to traffic"
+}
+
+### Delete Attendance Record
+DELETE {{baseUrl}}/507f1f77bcf86cd799439013
+Authorization: Bearer <your-jwt-token>
+
+### Verify Single Attendance Record
+PATCH {{baseUrl}}/507f1f77bcf86cd799439013/verify
+Content-Type: application/json
+Authorization: Bearer <your-jwt-token>
+
+{
+  "verified": true,
+  "verifiedBy": "507f1f77bcf86cd799439014",
+  "verificationNotes": "Attendance verified by supervisor"
+}
+
+### Bulk Verify Attendance for Event
+PATCH {{baseUrl}}/event/507f1f77bcf86cd799439012/bulk-verify
+Content-Type: application/json
+Authorization: Bearer <your-jwt-token>
+
+{
+  "attendanceIds": [
+    "507f1f77bcf86cd799439013",
+    "507f1f77bcf86cd799439015",
+    "507f1f77bcf86cd799439016"
+  ],
+  "verified": true,
+  "verifiedBy": "507f1f77bcf86cd799439014",
+  "verificationNotes": "Bulk verification completed for all present attendees"
+}
+
+### Get Verification Statistics for Event
+GET {{baseUrl}}/event/507f1f77bcf86cd799439012/verification-stats
+Authorization: Bearer <your-jwt-token>
+
+### Add Feedback to Attendance
+PATCH {{baseUrl}}/507f1f77bcf86cd799439013/feedback
+Content-Type: application/json
+Authorization: Bearer <your-jwt-token>
+
+{
+  "feedback": "Great participation during the event. Showed excellent teamwork skills.",
+  "feedbackBy": "507f1f77bcf86cd799439014"
+}
+
+### Create Attendance with Late Status
+POST {{baseUrl}}
+Content-Type: application/json
+Authorization: Bearer <your-jwt-token>
+
+{
+  "user": "507f1f77bcf86cd799439011",
+  "event": "507f1f77bcf86cd799439012",
+  "attendance": true,
+  "status": "late",
+  "lateMinutes": 30,
+  "earlyLeaveMinutes": 0,
+  "feedback": "Arrived 30 minutes late",
+  "checkInTime": "2024-01-15T09:30:00.000Z",
+  "checkOutTime": "2024-01-15T17:00:00.000Z"
+}
+
+### Create Attendance with Early Leave
+POST {{baseUrl}}
+Content-Type: application/json
+Authorization: Bearer <your-jwt-token>
+
+{
+  "user": "507f1f77bcf86cd799439011",
+  "event": "507f1f77bcf86cd799439012",
+  "attendance": true,
+  "status": "left_early",
+  "lateMinutes": 0,
+  "earlyLeaveMinutes": 60,
+  "feedback": "Left 1 hour early due to emergency",
+  "checkInTime": "2024-01-15T09:00:00.000Z",
+  "checkOutTime": "2024-01-15T16:00:00.000Z"
+}
+
+### Create Absent Attendance
+POST {{baseUrl}}
+Content-Type: application/json
+Authorization: Bearer <your-jwt-token>
+
+{
+  "user": "507f1f77bcf86cd799439011",
+  "event": "507f1f77bcf86cd799439012",
+  "attendance": false,
+  "status": "absent",
+  "lateMinutes": 0,
+  "earlyLeaveMinutes": 0,
+  "feedback": "No show - no prior notice"
+}
+
+### Create Excused Attendance
+POST {{baseUrl}}
+Content-Type: application/json
+Authorization: Bearer <your-jwt-token>
+
+{
+  "user": "507f1f77bcf86cd799439011",
+  "event": "507f1f77bcf86cd799439012",
+  "attendance": false,
+  "status": "excused",
+  "lateMinutes": 0,
+  "earlyLeaveMinutes": 0,
+  "feedback": "Excused due to medical appointment"
+}
+
+### Unverify Attendance Record
+PATCH {{baseUrl}}/507f1f77bcf86cd799439013/verify
+Content-Type: application/json
+Authorization: Bearer <your-jwt-token>
+
+{
+  "verified": false,
+  "verifiedBy": "507f1f77bcf86cd799439014",
+  "verificationNotes": "Attendance needs re-verification"
+}
+
+### Bulk Unverify Attendance for Event
+PATCH {{baseUrl}}/event/507f1f77bcf86cd799439012/bulk-verify
+Content-Type: application/json
+Authorization: Bearer <your-jwt-token>
+
+{
+  "attendanceIds": [
+    "507f1f77bcf86cd799439013",
+    "507f1f77bcf86cd799439015"
+  ],
+  "verified": false,
+  "verifiedBy": "507f1f77bcf86cd799439014",
+  "verificationNotes": "Bulk unverification - records need review"
+}
+
+### Update Attendance with Verification Notes
+PATCH {{baseUrl}}/507f1f77bcf86cd799439013/verify
+Content-Type: application/json
+Authorization: Bearer <your-jwt-token>
+
+{
+  "verified": true,
+  "verifiedBy": "507f1f77bcf86cd799439014",
+  "verificationNotes": "Verified after manual check-in confirmation"
+}
+
+### Get Verification Stats for Different Event
+GET {{baseUrl}}/event/507f1f77bcf86cd799439017/verification-stats
+Authorization: Bearer <your-jwt-token>
+
+### Add Detailed Feedback
+PATCH {{baseUrl}}/507f1f77bcf86cd799439013/feedback
+Content-Type: application/json
+Authorization: Bearer <your-jwt-token>
+
+{
+  "feedback": "Excellent participation in group activities. Demonstrated strong leadership skills and helped other team members. Contributed valuable insights during discussions.",
+  "feedbackBy": "507f1f77bcf86cd799439014"
+}
+
+### Create Multiple Attendance Records for Testing
+# Create Present Attendance
+POST {{baseUrl}}
+Content-Type: application/json
+Authorization: Bearer <your-jwt-token>
+
+{
+  "user": "507f1f77bcf86cd799439011",
+  "event": "507f1f77bcf86cd799439012",
+  "attendance": true,
+  "status": "present",
+  "lateMinutes": 0,
+  "earlyLeaveMinutes": 0,
+  "feedback": "Full attendance",
+  "checkInTime": "2024-01-15T09:00:00.000Z",
+  "checkOutTime": "2024-01-15T17:00:00.000Z"
+}
+
+# Create Late Attendance
+POST {{baseUrl}}
+Content-Type: application/json
+Authorization: Bearer <your-jwt-token>
+
+{
+  "user": "507f1f77bcf86cd799439018",
+  "event": "507f1f77bcf86cd799439012",
+  "attendance": true,
+  "status": "late",
+  "lateMinutes": 45,
+  "earlyLeaveMinutes": 0,
+  "feedback": "Arrived 45 minutes late",
+  "checkInTime": "2024-01-15T09:45:00.000Z",
+  "checkOutTime": "2024-01-15T17:00:00.000Z"
+}
+
+# Create Absent Attendance
+POST {{baseUrl}}
+Content-Type: application/json
+Authorization: Bearer <your-jwt-token>
+
+{
+  "user": "507f1f77bcf86cd799439019",
+  "event": "507f1f77bcf86cd799439012",
+  "attendance": false,
+  "status": "absent",
+  "lateMinutes": 0,
+  "earlyLeaveMinutes": 0,
+  "feedback": "No show",
+  "checkInTime": null,
+  "checkOutTime": null
+}
+
+# Create Excused Attendance
+POST {{baseUrl}}
+Content-Type: application/json
+Authorization: Bearer <your-jwt-token>
+
+{
+  "user": "507f1f77bcf86cd799439020",
+  "event": "507f1f77bcf86cd799439012",
+  "attendance": false,
+  "status": "excused",
+  "lateMinutes": 0,
+  "earlyLeaveMinutes": 0,
+  "feedback": "Excused due to family emergency",
+  "checkInTime": null,
+  "checkOutTime": null
+}
+
+# Create Early Leave Attendance
+POST {{baseUrl}}
+Content-Type: application/json
+Authorization: Bearer <your-jwt-token>
+
+{
+  "user": "507f1f77bcf86cd799439021",
+  "event": "507f1f77bcf86cd799439012",
+  "attendance": true,
+  "status": "left_early",
+  "lateMinutes": 0,
+  "earlyLeaveMinutes": 120,
+  "feedback": "Left 2 hours early for appointment",
+  "checkInTime": "2024-01-15T09:00:00.000Z",
+  "checkOutTime": "2024-01-15T15:00:00.000Z"
+}

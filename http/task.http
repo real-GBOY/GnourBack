@@ -1,0 +1,241 @@
+@host = http://localhost:4005
+
+@id = 68929f44e5238dcb4c033bf1
+### 1. Create Task with File Upload
+POST {{host}}/api/tasks
+Content-Type: multipart/form-data; boundary=----GnourTaskBoundary
+
+# ! Create Task with File Upload Response
+# {
+#   "success": true,
+#   "message": "Task created successfully with file",
+#   "data": {
+#     "_id": "689364861f511e23969424b1",
+#     "title": "Fix login bug",
+#     "description": "Login not working on iOS devices.",
+#     "status": "pending",
+#     "dueDate": "2025-08-20T00:00:00.000Z",
+#     "attachments": [
+#       {
+#         "fileUrl": "https://res.cloudinary.com/dbpb1lkwh/raw/upload/v1754489989/Gnour/ujxrktw4sqrfrvbmimb0",
+#         "fileName": "log.txt",
+#         "uploadedBy": "689154308b88065e6a232e4f",
+#         "uploadedAt": "2025-08-06T14:19:50.186Z",
+#         "_id": "689364861f511e23969424b2"
+#       }
+#     ],
+#     "whatAppGroup": "iOS Debug Group",
+#     "assignedTo": [],
+#     "createdBy": null,
+#     "createdAt": "2025-08-06T14:19:50.193Z",
+#     "__v": 0
+#   }
+# }
+
+------GnourTaskBoundary
+Content-Disposition: form-data; name="title"
+
+Fix login bug
+------GnourTaskBoundary
+Content-Disposition: form-data; name="userid"
+
+689154308b88065e6a232e4f
+------GnourTaskBoundary
+Content-Disposition: form-data; name="description"
+
+Login not working on iOS devices.
+------GnourTaskBoundary
+Content-Disposition: form-data; name="status"
+
+pending
+------GnourTaskBoundary
+Content-Disposition: form-data; name="dueDate"
+
+2025-08-20
+------GnourTaskBoundary
+Content-Disposition: form-data; name="whatAppGroup"
+
+
+64f1a51f238fa30123456789
+------GnourTaskBoundary
+Content-Disposition: form-data; name="file"; filename="log.txt"
+Content-Type: text/plain
+
+< ./log.txt
+------GnourTaskBoundary--
+
+
+### 2. Get All Tasks
+GET {{host}}/api/tasks
+# ! Get All Tasks Response
+# {
+#   "success": true,
+#   "data": [
+#     {
+#       "_id": "68929f44e5238dcb4c033bf1",
+#       "title": "Fix login bug",
+#       "description": "Login not working on iOS devices.",
+#       "status": "pending",
+#       "dueDate": "2025-08-20T00:00:00.000Z",
+#       "attachments": [
+#         {
+#           "fileUrl": "https://res.cloudinary.com/dbpb1lkwh/raw/upload/v1754439492/Gnour/ys1kfha1wq27re1eredk",
+#           "fileName": "log.txt",
+#           "uploadedBy": "689154308b88065e6a232e4f",
+#           "uploadedAt": "2025-08-06T00:18:12.222Z",
+#           "_id": "68929f44e5238dcb4c033bf2"
+#         }
+#       ],
+#       "whatAppGroup": "iOS Debug Group",
+#       "assignedTo": [
+#         "64f1a51f238fa30123456789"
+#       ],
+#       "createdBy": "689154308b88065e6a232e4f",
+#       "createdAt": "2025-08-06T00:18:12.230Z",
+#       "__v": 0
+#     },
+#     {
+#       "_id": "689364861f511e23969424b1",
+#       "title": "Fix login bug",
+#       "description": "Login not working on iOS devices.",
+#       "status": "pending",
+#       "dueDate": "2025-08-20T00:00:00.000Z",
+#       "attachments": [
+#         {
+#           "fileUrl": "https://res.cloudinary.com/dbpb1lkwh/raw/upload/v1754489989/Gnour/ujxrktw4sqrfrvbmimb0",
+#           "fileName": "log.txt",
+#           "uploadedBy": "689154308b88065e6a232e4f",
+#           "uploadedAt": "2025-08-06T14:19:50.186Z",
+#           "_id": "689364861f511e23969424b2"
+#         }
+#       ],
+#       "whatAppGroup": "iOS Debug Group",
+#       "assignedTo": [
+#         "64f1a51f238fa30123456789"
+#       ],
+#       "createdBy": "689154308b88065e6a232e4f",
+#       "createdAt": "2025-08-06T14:19:50.193Z",
+#       "__v": 0
+#     }
+#   ]
+# }
+
+
+### 3. Get Task by ID
+GET {{host}}/api/tasks/{{id}}
+# ! Get Task by ID Response
+# {
+#   "success": true,
+#   "data": {
+#     "_id": "68929f44e5238dcb4c033bf1",
+#     "title": "Fix login bug",
+#     "description": "Login not working on iOS devices.",
+#     "status": "pending",
+#     "dueDate": "2025-08-20T00:00:00.000Z",
+#     "attachments": [
+#       {
+#         "fileUrl": "https://res.cloudinary.com/dbpb1lkwh/raw/upload/v1754439492/Gnour/ys1kfha1wq27re1eredk",
+#         "fileName": "log.txt",
+#         "uploadedBy": "689154308b88065e6a232e4f",
+#         "uploadedAt": "2025-08-06T00:18:12.222Z",
+#         "_id": "68929f44e5238dcb4c033bf2"
+#       }
+#     ],
+#     "whatAppGroup": "iOS Debug Group",
+#     "assignedTo": [],
+#     "createdBy": null,
+#     "createdAt": "2025-08-06T00:18:12.230Z",
+#     "__v": 0
+#   }
+# }
+
+
+### 4. Update Task
+PATCH  {{host}}/api/tasks/{{id}}
+Content-Type: application/json
+
+{
+  "title": "Fix login issue - updated",
+  "status": "in_progress",
+  "dueDate": "2025-08-25",
+  "whatAppGroup": "iOS QA Team",
+  "assignedTo": ["64f1a51f238fa30123456789"]
+}
+# ! Update Task Response
+# {
+#   "success": true,
+#   "message": "Task updated successfully",
+#   "data": {
+#     "_id": "68929f44e5238dcb4c033bf1",
+#     "title": "Fix login issue - updated",
+#     "description": "Login not working on iOS devices.",
+#     "status": "in_progress",
+#     "dueDate": "2025-08-25T00:00:00.000Z",
+#     "attachments": [
+#       {
+#         "fileUrl": "https://res.cloudinary.com/dbpb1lkwh/raw/upload/v1754439492/Gnour/ys1kfha1wq27re1eredk",
+#         "fileName": "log.txt",
+#         "uploadedBy": "689154308b88065e6a232e4f",
+#         "uploadedAt": "2025-08-06T00:18:12.222Z",
+#         "_id": "68929f44e5238dcb4c033bf2"
+#       }
+#     ],
+#     "whatAppGroup": "iOS QA Team",
+#     "assignedTo": [],
+#     "createdBy": null,
+#     "createdAt": "2025-08-06T00:18:12.230Z",
+#     "__v": 0
+#   }
+# }
+
+### 5. Delete Task
+DELETE {{host}}/api/tasks/{{id}}
+
+
+### 6. Upload File to Existing Task
+POST {{host}}/api/tasks/{{id}}/upload-file
+Content-Type: multipart/form-data; boundary=----UploadFileBoundary
+# ! Upload File to Existing Task Response
+# {
+#   "success": true,
+#   "message": "File uploaded successfully to task",
+#   "data": {
+#     "_id": "68929f44e5238dcb4c033bf1",
+#     "title": "Fix login issue - updated",
+#     "description": "Login not working on iOS devices.",
+#     "status": "in_progress",
+#     "dueDate": "2025-08-25T00:00:00.000Z",
+#     "attachments": [
+#       {
+#         "fileUrl": "https://res.cloudinary.com/dbpb1lkwh/raw/upload/v1754439492/Gnour/ys1kfha1wq27re1eredk",
+#         "fileName": "log.txt",
+#         "uploadedBy": "689154308b88065e6a232e4f",
+#         "uploadedAt": "2025-08-06T00:18:12.222Z",
+#         "_id": "68929f44e5238dcb4c033bf2"
+#       },
+#       {
+#         "fileUrl": "https://res.cloudinary.com/dbpb1lkwh/image/upload/v1754490398/Gnour/obaroptghiybbjty4rqa.jpg",
+#         "fileName": "test.png",
+#         "uploadedAt": "2025-08-06T14:26:40.543Z",
+#         "_id": "689366201f511e23969424c9"
+#       }
+#     ],
+#     "whatAppGroup": "iOS QA Team",
+#     "assignedTo": [],
+#     "createdBy": null,
+#     "createdAt": "2025-08-06T00:18:12.230Z",
+#     "__v": 1
+#   }
+# }
+
+
+------UploadFileBoundary
+Content-Disposition: form-data; name="file"; filename="test.png"
+Content-Type: application/image/png
+
+< ./test.png
+------UploadFileBoundary--
+
+
+### 7. Remove File from Task by Index
+DELETE {{host}}/api/tasks/{{id}}/files/68928c6c54f90c26ab58ae57

@@ -1,0 +1,89 @@
+@host = http://localhost:4005
+
+### Create Event with Multipart Form and File Upload
+POST {{host}}/api/events
+Content-Type: multipart/form-data; boundary=----GnourEventBoundaryXyz
+Authorization: Bearer <your-jwt-token>
+
+------GnourEventBoundaryXyz
+Content-Disposition: form-data; name="title"
+
+Tech Conference 2025
+------GnourEventBoundaryXyz
+Content-Disposition: form-data; name="description"
+
+A conference about the latest in tech.
+------GnourEventBoundaryXyz
+Content-Disposition: form-data; name="startDate"
+
+2025-09-15T09:00:00.000Z
+------GnourEventBoundaryXyz
+Content-Disposition: form-data; name="endDate"
+
+2025-09-17T18:00:00.000Z
+------GnourEventBoundaryXyz
+Content-Disposition: form-data; name="location"
+
+Cairo International Convention Center
+------GnourEventBoundaryXyz
+Content-Disposition: form-data; name="eventType"
+
+team-meeting
+------GnourEventBoundaryXyz
+Content-Disposition: form-data; name="createdBy"
+
+507f1f77bcf86cd799439011
+------GnourEventBoundaryXyz
+Content-Disposition: form-data; name="file"; filename="test.png"
+Content-Type: image/png
+
+< ./test.png
+------GnourEventBoundaryXyz--
+
+### Get All Events
+GET {{host}}/api/events
+Authorization: Bearer <your-jwt-token>
+
+### Get Event by ID
+GET {{host}}/api/events/507f1f77bcf86cd799439012
+Authorization: Bearer <your-jwt-token>
+
+### Update Event
+PATCH {{host}}/api/events/507f1f77bcf86cd799439012
+Content-Type: multipart/form-data; boundary=----GnourEventBoundaryXyz
+Authorization: Bearer <your-jwt-token>
+
+------GnourEventBoundaryXyz
+Content-Disposition: form-data; name="title"
+
+Updated Tech Conference 2025
+------GnourEventBoundaryXyz
+Content-Disposition: form-data; name="description"
+
+An updated conference about the latest in tech with new speakers.
+------GnourEventBoundaryXyz
+Content-Disposition: form-data; name="location"
+
+Updated Cairo International Convention Center
+------GnourEventBoundaryXyz
+Content-Disposition: form-data; name="file"; filename="updated-test.png"
+Content-Type: image/png
+
+< ./test.png
+------GnourEventBoundaryXyz--
+
+### Update Event (JSON - without file)
+PATCH {{host}}/api/events/507f1f77bcf86cd799439012
+Content-Type: application/json
+Authorization: Bearer <your-jwt-token>
+
+{
+  "title": "Updated Tech Conference 2025",
+  "description": "An updated conference about the latest in tech with new speakers.",
+  "location": "Updated Cairo International Convention Center",
+  "eventType": "conference"
+}
+
+### Delete Event
+DELETE {{host}}/api/events/507f1f77bcf86cd799439012
+Authorization: Bearer <your-jwt-token>

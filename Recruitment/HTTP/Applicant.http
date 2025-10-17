@@ -1,0 +1,51 @@
+### Recruitment Applicants API
+
+@host = http://localhost:4005
+@base = {{host}}/api/recruitment/applicants
+@id = 000000000000000000000000
+@token = <paste_jwt_here>
+
+### Create Applicant
+POST {{base}}
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@example.com",
+  "phone": "+201001234567",
+  "gender": "Male",
+  "faculty": "Engineering",
+  "academicYear": "3rd Year",
+  "selectedTeam": "Project",
+  "skills": ["Leadership", "Programming", "Public Speaking"],
+  "relevantExperience": "Led a student project team to develop an app.",
+  "socialLinks": ["https://linkedin.com/in/johndoe"],
+  "dateOfBirth": "2002-05-10",
+  "acceptedTerms": true
+}
+
+### Get Applicants (list with filters and pagination)
+GET {{base}}?page=1&limit=10&selectedTeam=Project&academicYear=3rd%20Year&gender=Male&q=john
+Authorization: Bearer {{token}}
+
+### Get Applicant by Id
+GET {{base}}/{{id}}
+Authorization: Bearer {{token}}
+
+### Update Applicant
+PATCH {{base}}/{{id}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "selectedTeam": "Digital Marketing",
+  "skills": ["Marketing", "Communication"],
+  "socialLinks": ["https://twitter.com/johndoe"]
+}
+
+### Delete Applicant
+DELETE {{base}}/{{id}}
+Authorization: Bearer {{token}}
+
+

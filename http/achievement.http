@@ -1,0 +1,187 @@
+### Achievement Management API Tests
+
+### 1. Get All Achievements (Public - No Auth Required)
+GET {{baseUrl}}/api/achievements
+Content-Type: application/json
+
+### 2. Get Achievement Statistics (Public - No Auth Required)
+GET {{baseUrl}}/api/achievements/stats
+Content-Type: application/json
+
+### 3. Get Achievement by ID (Requires Authentication)
+GET {{baseUrl}}/api/achievements/{{achievementId}}
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+### 4. Get User Achievements (Requires Authentication)
+GET {{baseUrl}}/api/achievements/user/{{userId}}
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+### 5. Create Achievement with Certificate File (Requires CreateAchievement permission)
+# IMPORTANT: Use "file" as the field name for the file upload
+POST {{baseUrl}}/api/achievements
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+Authorization: Bearer {{authToken}}
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="title"
+
+Excellence in Leadership
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="description"
+
+Demonstrated exceptional leadership skills during the annual project
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="achievementType"
+
+best_member_of_the_month
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="userId"
+
+{{userId}}
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="badgeIcon"
+
+https://example.com/badges/leadership.png
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="certificate.pdf"
+Content-Type: application/pdf
+
+< ./path/to/certificate.pdf
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+### 5.1. Create Achievement with Photo (Requires CreateAchievement permission)
+# IMPORTANT: Use "file" as the field name for the file upload
+POST {{baseUrl}}/api/achievements
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+Authorization: Bearer {{authToken}}
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="title"
+
+Excellence in Leadership
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="description"
+
+Demonstrated exceptional leadership skills during the annual project
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="achievementType"
+
+best_member_of_the_month
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="userId"
+
+{{userId}}
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="badgeIcon"
+
+https://example.com/badges/leadership.png
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="achievement_photo.jpg"
+Content-Type: image/jpeg
+
+< ./path/to/achievement_photo.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+### 6. Create Achievement without File (Requires CreateAchievement permission)
+POST {{baseUrl}}/api/achievements
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+  "title": "Excellence in Leadership",
+  "description": "Demonstrated exceptional leadership skills during the annual project",
+  "achievementType": "best_member_of_the_month",
+  "userId": "{{userId}}",
+  "badgeIcon": "https://example.com/badges/leadership.png"
+}
+
+### 7. Update Achievement (Requires EditAchievement permission)
+PATCH {{baseUrl}}/api/achievements/{{achievementId}}
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+  "title": "Updated Excellence in Leadership",
+  "description": "Updated description for the leadership achievement",
+  "achievementType": "best_member_of_the_month",
+  "badgeIcon": "https://example.com/badges/leadership-updated.png"
+}
+
+### 8. Delete Achievement (Requires DeleteAchievement permission)
+DELETE {{baseUrl}}/api/achievements/{{achievementId}}
+Authorization: Bearer {{authToken}}
+
+### 9. Upload Supporting Document to Achievement (Requires EditAchievement permission)
+# IMPORTANT: Use "file" as the field name for the file upload
+POST {{baseUrl}}/api/achievements/{{achievementId}}/supporting-document
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+Authorization: Bearer {{authToken}}
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="description"
+
+Project proposal document that led to this achievement
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="proposal.pdf"
+Content-Type: application/pdf
+
+< ./path/to/proposal.pdf
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+### 9.1. Upload Supporting Photo to Achievement (Requires EditAchievement permission)
+# IMPORTANT: Use "file" as the field name for the file upload
+POST {{baseUrl}}/api/achievements/{{achievementId}}/supporting-document
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+Authorization: Bearer {{authToken}}
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="description"
+
+Photo from the project presentation
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="presentation_photo.jpg"
+Content-Type: image/jpeg
+
+< ./path/to/presentation_photo.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+### 9.2. Upload Achievement Photo (Requires EditAchievement permission)
+# IMPORTANT: Use "file" as the field name for the file upload
+POST {{baseUrl}}/api/achievements/{{achievementId}}/photo
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+Authorization: Bearer {{authToken}}
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="achievement_photo.jpg"
+Content-Type: image/jpeg
+
+< ./path/to/achievement_photo.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+### 10. Remove Supporting Document from Achievement (Requires EditAchievement permission)
+DELETE {{baseUrl}}/api/achievements/{{achievementId}}/file/supporting/0
+Authorization: Bearer {{authToken}}
+
+### 11. Remove Certificate File from Achievement (Requires EditAchievement permission)
+DELETE {{baseUrl}}/api/achievements/{{achievementId}}/file/certificate/0
+Authorization: Bearer {{authToken}}
+
+### 11.1. Remove Achievement Photo from Achievement (Requires EditAchievement permission)
+DELETE {{baseUrl}}/api/achievements/{{achievementId}}/file/photo/0
+Authorization: Bearer {{authToken}}
+
+### 12. Get Achievements with Filtering and Pagination
+GET {{baseUrl}}/api/achievements?page=1&limit=5&type=best_member_of_the_month&sort=-dateAwarded&search=leadership
+Content-Type: application/json
+
+### 13. Get User Achievements with Filtering and Pagination
+GET {{baseUrl}}/api/achievements/user/{{userId}}?page=1&limit=10&sort=-dateAwarded
+Content-Type: application/json
+
+### Variables (set these in your environment or at the top of the file)
+@baseUrl = http://localhost:4005
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OTM4ZDhmYzFhM2VhYWYyODhhOTAwYyIsImVtYWlsIjoibWFobW1vdWRuYXllbDIwMDRAZ21haWwuY29tIiwibmFtZSI6Ik1haG1vdWQgTmF5ZWwiLCJyb2xlIjp7ImlkIjoiNjg5MTVkNDczNDJlYmE4YzYxNmI3YjU4Iiwia2V5IjoiUHJlc2lkZW50IiwicGVybWlzc2lvbnMiOlt7Il9pZCI6IjY4OTE1ZDQ3MzQyZWJhOGM2MTZiN2IzYSIsImtleSI6ImFwcHJvdmVfcGVyc29uIn0seyJfaWQiOiI2ODk0YzI0YzNhYzE5YWRkMDRlMDQ0NTkiLCJrZXkiOiJ2aWV3X3VucHJvdmVkX3BlcnNvbiJ9LHsiX2lkIjoiNjg5MTVkNDczNDJlYmE4YzYxNmI3YjM5Iiwia2V5IjoicmVqZWN0X3BlcnNvbiJ9LHsiX2lkIjoiNjg5MTVkNDczNDJlYmE4YzYxNmI3YjNjIiwia2V5Ijoidmlld19wZXJzb24ifSx7Il9pZCI6IjY4OTE1ZDQ3MzQyZWJhOGM2MTZiN2IzYSIsImtleSI6InZlcmlmeV9wZXJzb24ifSx7Il9pZCI6IjY4OTE1ZDQ3MzQyZWJhOGM2MTZiN2IzYSIsImtleSI6InZpZXdfdGVhbV9tZW1iZXJzIn0seyJfaWQiOiI2ODkxNWQ0NzM0MmViYThjNjE2YjdiM2IiLCJrZXkiOiJjcmVhdGVfdGVhbSJ9LHsiX2lkIjoiNjg5MTVkNDczNDJlYmE4YzYxNmI3YjQwIiwia2V5IjoiZWRpdF90ZWFtIn0seyJfaWQiOiI2ODkxNWQ0NzM0MmViYThjNjE2YjdiNDIiLCJrZXkiOiJkZWxldGVfdGVhbSJ9LHsiX2lkIjoiNjg5MTVkNDczNDJlYmE4YzYxNmI3YjNkIiwia2V5Ijoidmlld190ZWFtIn0seyJfaWQiOiI2ODkxNWQ0NzM0MmViYThjNjE2YjdiM2UiLCJrZXkiOiJjcmVhdGVfdGVhbXNfaW5fdGFzayJ9LHsiX2lkIjoiNjg5MTVkNDczNDJlYmE4YzYxNmI3YjNmIiwia2V5IjoiZWRpdF90ZWFtc19pbl90YXNrIn0seyJfaWQiOiI2ODkxNWQ0NzM0MmViYThjNjE2YjdiNGUiLCJrZXkiOiJkZWxldGVfdGVhbXNfaW5fdGFzayJ9LHsiX2lkIjoiNjg5MTVkNDczNDJlYmE4YzYxNmI3YjQxIiwia2V5Ijoidmlld190ZWFtc19pbl90YXNrIn0seyJfaWQiOiI2ODkxNWQ0NzM0MmViYThjNjE2YjdiNTAiLCJrZXkiOiJjcmVhdGVfZXZlbnQifSx7Il9pZCI6IjY4OTE1ZDQ3MzQyZWJhOGM2MTZiN2I0MyIsImtleSI6ImVkaXRfZXZlbnQifSx7Il9pZCI6IjY4OTE1ZDQ3MzQyZWJhOGM2MTZiN2I0NCIsImtleSI6ImRlbGV0ZV9ldmVudCJ9LHsiX2lkIjoiNjg5MTVkNDczNDJlYmE4YzYxNmI3YjQ1Iiwia2V5Ijoidmlld19ldmVudCJ9LHsiX2lkIjoiNjg5OGMzZWQzMzBkOTgzNTVjMmFhZjViIiwia2V5IjoiaW52aXRlX21lbWJlcnNfdG9fZXZlbnQifSx7Il9pZCI6IjY4OThjM2VkMzMwZDk4MzU1YzJhYWY1YyIsImtleSI6InJlbW92ZV9tZW1iZXJzX2Zyb21fZXZlbnQifSx7Il9pZCI6IjY4OThjM2VkMzMwZDk4MzU1YzJhYWY1ZCIsImtleSI6Im1hbmFnZV9ldmVudF9ndWVzdHMifSx7Il9pZCI6IjY4OTE1ZDQ3MzQyZWJhOGM2MTZiN2I0NiIsImtleSI6ImNyZWF0ZV90YXNrIn0seyJfaWQiOiI2ODkxNWQ0NzM0MmViYThjNjE2YjdiNDciLCJrZXkiOiJlZGl0X3Rhc2sifSx7Il9pZCI6IjY4OTE1ZDQ3MzQyZWJhOGM2MTZiN2I0OCIsImtleSI6ImRlbGV0ZV90YXNrIn0seyJfaWQiOiI2ODkxNWQ0NzM0MmViYThjNjE2YjdiNDkiLCJrZXkiOiJ2aWV3X3Rhc2sifSx7Il9pZCI6IjY4OTE1ZDQ3MzQyZWJhOGM2MTZiN2I0YSIsImtleSI6InVwbG9hZF9maWxlIn0seyJfaWQiOiI2ODkxNWQ0NzM0MmViYThjNjE2YjdiNGIiLCJrZXkiOiJjcmVhdGVfZmVlZGJhY2sifSx7Il9pZCI6IjY4OTE1ZDQ3MzQyZWJhOGM2MTZiN2I0YyIsImtleSI6ImVkaXRfZmVlZGJhY2sifSx7Il9pZCI6IjY4OTE1ZDQ3MzQyZWJhOGM2MTZiN2I0ZCIsImtleSI6ImRlbGV0ZV9mZWVkYmFjayJ9LHsiX2lkIjoiNjg5MTVkNDczNDJlYmE4YzYxNmI3YjUzIiwia2V5Ijoidmlld19mZWVkYmFjayJ9LHsiX2lkIjoiNjg5MTVkNDczNDJlYmE4YzYxNmI3YjRmIiwia2V5IjoiY3JlYXRlX2F0dGVuZGFuY2UifSx7Il9pZCI6IjY4OTE1ZDQ3MzQyZWJhOGM2MTZiN2I1NCIsImtleSI6ImVkaXRfYXR0ZW5kYW5jZSJ9LHsiX2lkIjoiNjg5MTVkNDczNDJlYmE4YzYxNmI3YjUxIiwia2V5IjoiZGVsZXRlX2F0dGVuZGFuY2UifSx7Il9pZCI6IjY4OTE1ZDQ3MzQyZWJhOGM2MTZiN2I1MiIsImtleSI6InZpZXdfYXR0ZW5kYW5jZSJ9LHsiX2lkIjoiNjg5OGMzZWQzMzBkOTgzNTVjMmFhZjVlIiwia2V5IjoiY3JlYXRlX2FjaGlldmVtZW50In0seyJfaWQiOiI2ODk4YzNlZDMzMGQ5ODM1NWMyYWFmNWYiLCJrZXkiOiJlZGl0X2FjaGlldmVtZW50In0seyJfaWQiOiI2ODk4YzNlZDMzMGQ5ODM1NWMyYWFmNjAiLCJrZXkiOiJkZWxldGVfYWNoaWV2ZW1lbnQifSx7Il9pZCI6IjY4OThjM2VkMzMwZDk4MzU1YzJhYWY2MiIsImtleSI6InZpZXdfYWNoaWV2ZW1lbnQifSx7Il9pZCI6IjY4OThjM2VkMzMwZDk4MzU1YzJhYWY2MSIsImtleSI6ImFzc2lnbl9hY2hpZXZlbWVudCJ9XX0sImlhdCI6MTc1NTEyNTgwNiwiZXhwIjoxNzU1MjEyMjA2fQ.FfnxFSLKSchT5hAZ1Bi-BG97K4_mMsyW7OBa4tlaHv8
+@userId = 68938c936b092731556734a5
+@achievementId = achievement_id_here

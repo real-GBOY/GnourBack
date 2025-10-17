@@ -1,0 +1,58 @@
+@host = http://localhost:4005/api/teams
+@id = 689366601f511e23969424db
+### Create a new team
+POST {{host}}
+Content-Type: application/json
+
+{
+  "name": "mohsen Team",
+  "description": "Handles all product development"
+}
+
+### Get all teams
+
+GET {{host}}
+# ! Get all teams Response
+# [
+#   {
+#     "_id": "689366601f511e23969424db",
+#     "name": "mohsen Team",
+#     "description": "Handles all product development",
+#     "teamViceHead": [],
+#     "createdAt": "2025-08-06T14:27:44.481Z",
+#     "__v": 0
+#   }
+# ]
+
+### GetById
+
+GET {{host}}/{{id}}
+# ! Get team by id Response
+#
+# [
+#   {
+#     "_id": "689366601f511e23969424db",
+#     "name": "mohsen Team",
+#     "description": "Handles all product development",
+#     "teamViceHead": [],
+#     "createdAt": "2025-08-06T14:27:44.481Z",
+#     "__v": 0
+#   }
+# ]
+
+### Patch Team
+
+PATCH {{host}}/{{id}}
+Content-Type: application/json
+
+{
+  "name":"Mohsen Team",
+  "description" :"hello"
+}
+
+###Delete Team
+
+DELETE {{host}}/{{id}}
+
+
+
