@@ -122,7 +122,6 @@ const ApplicationSchema = new mongoose.Schema({
 
 	acceptedTerms: {
 		type: Boolean,
-		required: true,
 		default: false,
 	},
 
