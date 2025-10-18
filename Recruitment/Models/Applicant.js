@@ -96,7 +96,19 @@ const ApplicationSchema = new mongoose.Schema({
 		trim: true,
 	},
 
-	socialLinks: [
+	facebook: {
+		type: String,
+		required: true,
+		trim: true,
+		validate: {
+			validator: (value) =>
+				/^(https?:\/\/)(www\.)?(facebook\.com|fb\.com)\/.+$/i.test(value),
+			message:
+				"Facebook profile URL is required. Use format like https://facebook.com/username or https://fb.com/username",
+		},
+	},
+
+	otherSocialLinks: [
 		{
 			type: String,
 			trim: true,
