@@ -39,7 +39,7 @@ const ApplicationSchema = new mongoose.Schema({
 	gender: {
 		type: String,
 		required: true,
-		enum: ["Male", "Female", "Prefer not to say"],
+		enum: ["Male", "Female", "Mickey Mouse"],
 	},
 
 	faculty: {
