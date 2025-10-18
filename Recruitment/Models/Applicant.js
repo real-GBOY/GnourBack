@@ -112,8 +112,12 @@ const ApplicationSchema = new mongoose.Schema({
 		type: String,
 		trim: true,
 		validate: {
-			validator: (value) =>
-				/^(https?:\/\/)(www\.)?(instagram\.com)\/.+$/i.test(value),
+			validator: function (value) {
+				// Only validate if value is provided and not empty
+				return (
+					!value || /^(https?:\/\/)(www\.)?(instagram\.com)\/.+$/i.test(value)
+				);
+			},
 			message:
 				"Invalid Instagram URL. Use format like https://instagram.com/username",
 		},
@@ -123,8 +127,12 @@ const ApplicationSchema = new mongoose.Schema({
 		type: String,
 		trim: true,
 		validate: {
-			validator: (value) =>
-				/^(https?:\/\/)(www\.)?(linkedin\.com)\/.+$/i.test(value),
+			validator: function (value) {
+				// Only validate if value is provided and not empty
+				return (
+					!value || /^(https?:\/\/)(www\.)?(linkedin\.com)\/.+$/i.test(value)
+				);
+			},
 			message:
 				"Invalid LinkedIn URL. Use format like https://linkedin.com/in/username",
 		},
