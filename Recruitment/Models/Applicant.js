@@ -108,6 +108,28 @@ const ApplicationSchema = new mongoose.Schema({
 		},
 	},
 
+	instagram: {
+		type: String,
+		trim: true,
+		validate: {
+			validator: (value) =>
+				/^(https?:\/\/)(www\.)?(instagram\.com)\/.+$/i.test(value),
+			message:
+				"Invalid Instagram URL. Use format like https://instagram.com/username",
+		},
+	},
+
+	linkedin: {
+		type: String,
+		trim: true,
+		validate: {
+			validator: (value) =>
+				/^(https?:\/\/)(www\.)?(linkedin\.com)\/.+$/i.test(value),
+			message:
+				"Invalid LinkedIn URL. Use format like https://linkedin.com/in/username",
+		},
+	},
+
 	otherSocialLinks: [
 		{
 			type: String,
