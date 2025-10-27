@@ -166,6 +166,32 @@ GnourBack/
 node test-upload.js
 ```
 
+### Utility Scripts
+
+**Delete all users except President:**
+
+```bash
+node delete-all-users-except-president.js
+```
+
+This script will delete all users except those with the President role. A 3-second warning is shown before deletion.
+
+**Delete all tasks:**
+
+```bash
+node delete-all-tasks.js
+```
+
+This script will delete all tasks from the database. A 3-second warning is shown before deletion.
+
+**Delete all events:**
+
+```bash
+node delete-all-events.js
+```
+
+This script will delete all events from the database. A 3-second warning is shown before deletion.
+
 ### HTTP Testing
 
 Use the files in the `http/` directory with REST Client extensions or tools like Postman.

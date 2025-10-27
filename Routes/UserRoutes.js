@@ -39,8 +39,17 @@ router.get(
 	userController.getUnverifiedUsers
 );
 
-// Get a specific user by ID (requires ViewPerson OR ViewTeamMembers permission)
-router.get("/:id", verifyToken, setUserData, userController.getuser);
+// Update user data (self, team board, or President can edit)
+router.patch("/:id", verifyToken, setUserData, userController.updateUser);
+
+// Delete user (requires ViewTeamMembers permission)
+router.delete(
+	"/:id",
+	verifyToken,
+	setUserData,
+	verifyPermission(permission.ViewTeamMembers),
+	userController.deleteUser
+);
 
 // Verify user and optionally assign role
 router.patch(
@@ -57,5 +66,8 @@ router.patch(
 	setUserData,
 	userController.assignRole
 );
+
+// Get a specific user by ID (requires ViewPerson OR ViewTeamMembers permission)
+router.get("/:id", verifyToken, setUserData, userController.getuser);
 
 module.exports = router;

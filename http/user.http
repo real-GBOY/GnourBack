@@ -259,4 +259,62 @@ GET {{host}}/team/{{teamId}}/members
 
 ### Get all teams with their members (requires ViewTeamMembers permission - Members can use this)
 GET {{host}}/teams/with-members
-{{authHeader}} 
+{{authHeader}}
+
+### Update User (self, team board, or President can edit)
+PUT {{host}}/{{userId}}
+{{authHeader}}
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Updated",
+  "phoneNumber": "+201234567890",
+  "dateOfBirth": "1990-01-01"
+}
+
+# ! Update User Response
+# {
+#   "success": true,
+#   "message": "User updated successfully",
+#   "data": {
+#     "_id": "68938d8fc1a3eaaf288a900c",
+#     "firstName": "John",
+#     "lastName": "Updated",
+#     "email": "john.doe@example.com",
+#     "phoneNumber": "+201234567890",
+#     "role": {
+#       "_id": "...",
+#       "key": "Member"
+#     },
+#     "team": {
+#       "_id": "...",
+#       "name": "Project Team"
+#     }
+#   }
+# }
+
+### Update User Profile Picture
+PUT {{host}}/{{userId}}
+{{authHeader}}
+Content-Type: application/json
+
+{
+  "profilePicture": "https://res.cloudinary.com/your-cloud-name/image/upload/v1/profiles/new-photo.png"
+}
+
+### Delete User (requires ViewTeamMembers permission)
+DELETE {{host}}/{{userId}}
+{{authHeader}}
+
+# ! Delete User Response
+# {
+#   "success": true,
+#   "message": "User deleted successfully",
+#   "data": {
+#     "userId": "68938d8fc1a3eaaf288a900c",
+#     "firstName": "John",
+#     "lastName": "Doe",
+#     "email": "john.doe@example.com"
+#   }
+# }

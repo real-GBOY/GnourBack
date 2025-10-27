@@ -492,3 +492,199 @@ exports.getAllTeamsWithMembers = async (req, res) => {
 		});
 	}
 };
+
+// Delete user
+exports.deleteUser = async (req, res) => {
+	try {
+		// Check if user has permission to delete users
+		if (!req.user.role || !req.user.role.permissions) {
+			return res.status(403).json({
+				success: false,
+				message: "Access denied: Insufficient permissions",
+			});
+		}
+
+		// Check if user has ViewTeamMembers permission (admin permission)
+		const hasPermission = req.user.role.permissions.some(
+			(permission) =>
+				permission.key === "view_team_members" ||
+				permission === "view_team_members"
+		);
+
+		if (!hasPermission) {
+			return res.status(403).json({
+				success: false,
+				message:
+					"Access denied: You don't have permission to delete users. Required permission: view_team_members",
+			});
+		}
+
+		const userId = req.params.id;
+
+		if (!userId) {
+			return res.status(400).json({
+				success: false,
+				message: "User ID is required",
+			});
+		}
+
+		// Check if req.user exists and has an id
+		if (!req.user || !req.user.id) {
+			return res.status(401).json({
+				success: false,
+				message: "User authentication required",
+			});
+		}
+
+		// Prevent deleting yourself
+		const currentUserId = req.user.id.toString
+			? req.user.id.toString()
+			: req.user.id;
+		if (currentUserId === userId.toString()) {
+			return res.status(400).json({
+				success: false,
+				message: "You cannot delete your own account",
+			});
+		}
+
+		// Find and delete the user
+		const deletedUser = await User.findByIdAndDelete(userId);
+
+		if (!deletedUser) {
+			return res.status(404).json({
+				success: false,
+				message: "User not found",
+			});
+		}
+
+		res.status(200).json({
+			success: true,
+			message: "User deleted successfully",
+			data: {
+				userId: deletedUser._id,
+				firstName: deletedUser.firstName,
+				lastName: deletedUser.lastName,
+				email: deletedUser.email,
+			},
+		});
+	} catch (error) {
+		console.error("DeleteUser error:", error);
+		res.status(500).json({
+			success: false,
+			message: error.message || "Internal server error",
+		});
+	}
+};
+
+// Update user data
+exports.updateUser = async (req, res) => {
+	try {
+		const { id } = req.params;
+		const updateData = req.body;
+
+		// Check if req.user exists
+		if (!req.user || !req.user.id) {
+			return res.status(401).json({
+				success: false,
+				message: "User authentication required",
+			});
+		}
+
+		// Validate user ID
+		if (!id) {
+			return res.status(400).json({
+				success: false,
+				message: "User ID is required",
+			});
+		}
+
+		// Get the user to be updated
+		const userToUpdate = await User.findById(id);
+		if (!userToUpdate) {
+			return res.status(404).json({
+				success: false,
+				message: "User not found",
+			});
+		}
+
+		// Get current user's role from database to check access
+		const currentUser = await User.findById(req.user.id).populate("role");
+		if (!currentUser) {
+			return res.status(404).json({
+				success: false,
+				message: "Current user not found",
+			});
+		}
+
+		const currentUserRole = currentUser.role?.key;
+		const isEditingSelf = currentUser._id.toString() === id;
+
+		// Check access control:
+		// 1. User can always edit themselves
+		// 2. President can edit anyone
+		// 3. Team board (team leader/vice head) can edit their team members
+
+		let hasPermission = false;
+
+		if (isEditingSelf) {
+			hasPermission = true;
+		} else if (currentUserRole === "President") {
+			hasPermission = true;
+		} else if (currentUserRole === "Head" || currentUserRole === "ViceHead") {
+			// Check if the user being edited is in the same team as the requester
+			if (
+				currentUser.team &&
+				userToUpdate.team &&
+				currentUser.team.toString() === userToUpdate.team.toString()
+			) {
+				hasPermission = true;
+			}
+		}
+
+		if (!hasPermission) {
+			return res.status(403).json({
+				success: false,
+				message: "Access denied: You don't have permission to edit this user",
+			});
+		}
+
+		// Fields that can be updated
+		const allowedFields = [
+			"firstName",
+			"lastName",
+			"phoneNumber",
+			"dateOfBirth",
+			"profilePicture",
+		];
+
+		// Filter out fields that are not allowed to be updated
+		const filteredData = {};
+		allowedFields.forEach((field) => {
+			if (updateData[field] !== undefined) {
+				filteredData[field] = updateData[field];
+			}
+		});
+
+		// Update the user
+		const updatedUser = await User.findByIdAndUpdate(id, filteredData, {
+			new: true,
+		})
+			.select(
+				"firstName lastName email phoneNumber dateOfBirth profilePicture role team isActive isVerified"
+			)
+			.populate("role", "key")
+			.populate("team", "name description");
+
+		res.status(200).json({
+			success: true,
+			message: "User updated successfully",
+			data: updatedUser,
+		});
+	} catch (error) {
+		console.error("UpdateUser error:", error);
+		res.status(500).json({
+			success: false,
+			message: error.message || "Internal server error",
+		});
+	}
+};

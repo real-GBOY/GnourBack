@@ -53,7 +53,7 @@ exports.getApplicants = async (req, res) => {
 	try {
 		const {
 			page = 1,
-			limit = 20,
+			limit = 100, // Increased from 20 to 100
 			selectedTeam,
 			academicYear,
 			gender,
