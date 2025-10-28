@@ -15,7 +15,7 @@ router.post("/logout", authController.Logout);
 // Profile routes - requires authentication
 router.get("/profile/:id", verifyToken, authController.GetProfile);
 router.get("/profile", verifyToken, authController.GetMyProfile);
-router.put("/profile", verifyToken, handleupload, authController.UpdateProfile);
-router.put("/profile/password", verifyToken, authController.ChangePassword);
+router.patch("/profile", verifyToken, handleupload, authController.UpdateProfile);
+router.patch("/profile/password", verifyToken, authController.ChangePassword);
 
 module.exports = router;
